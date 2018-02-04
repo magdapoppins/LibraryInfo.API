@@ -9,7 +9,7 @@ namespace LibraryInfo.API.Services
         City GetCity(int cityId);
 
         IEnumerable<Library> GetLibrariesForCity(int cityId);
-        Library GetLibraryForCity(int cityId, int libraryId);
+        Library GetLibraryForCity(int libraryId);
 
         void UpdateCity(City city);
         void UpdateLibrary(Library library);

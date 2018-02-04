@@ -50,7 +50,7 @@ namespace LibraryInfo.API.Controllers
             {
                 return NotFound();
             }
-            var library = _libraryInfoRepository.GetLibraryForCity(cityId, id);
+            var library = _libraryInfoRepository.GetLibraryForCity(id);
             var libraryToReturn = new LibraryDto()
             {
                 Name = library.Name,
@@ -78,6 +78,7 @@ namespace LibraryInfo.API.Controllers
                 Contact = library.Contact
             };
             libraryEntity.CityId = cityId;
+            libraryEntity.City = _libraryInfoRepository.GetCity(cityId);
 
             _libraryInfoRepository.AddLibrary(libraryEntity);
             _libraryInfoRepository.Save();

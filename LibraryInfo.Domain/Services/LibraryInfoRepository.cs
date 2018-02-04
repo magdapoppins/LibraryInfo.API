@@ -41,14 +41,11 @@ namespace LibraryInfo.API.Services
             return libraries;
         }
 
-        public Library GetLibraryForCity(int cityId, int libraryId)
+        public Library GetLibraryForCity(int libraryId)
         {
-            var city = _context.Cities
-                .FirstOrDefault(c => c.Id == cityId);
-            var library = city.Libraries
+            var library = _context.Libraries
                 .FirstOrDefault(l => l.Id == libraryId);
             return library;
-
         }
 
         public bool Save()
@@ -65,7 +62,7 @@ namespace LibraryInfo.API.Services
 
         public void UpdateLibrary(Library library)
         {
-            var updateable = GetLibraryForCity(library.CityId, library.Id);
+            var updateable = GetLibraryForCity(library.Id);
             updateable.Name = library.Name;
             updateable.Contact = library.Contact;
 
@@ -83,7 +80,7 @@ namespace LibraryInfo.API.Services
 
         public void DeleteLibrary (int cityId, int id)
         {
-            var library = GetLibraryForCity(cityId, id);
+            var library = GetLibraryForCity(id);
             _context.Libraries.Remove(library);
         }
 
