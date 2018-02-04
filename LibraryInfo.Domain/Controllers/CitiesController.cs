@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using LibraryInfo.API.Entities;
 using LibraryInfo.API.Models;
 using LibraryInfo.API.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -52,7 +53,22 @@ namespace LibraryInfo.API.Controllers
             var cityToReturn = Mapper.Map<CityDto>(cityEntity);
             return Ok(cityToReturn);
         }
-        //[HttpPost()]
+
+        [HttpPost()]
+        public IActionResult AddCity([FromBody] CityForCreationDto city)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var cityEntity = new City()
+            {
+                Name = city.Name,
+                Inhabitants = city.Inhabitants
+            };
+            _libraryInfoRepository.AddCity(cityEntity);
+            return Created($"api/cities", cityEntity);
+        }
         //[HttpPut("{id}")]
         //[HttpPatch("{id}")]
         //[HttpDelete("{id}")]

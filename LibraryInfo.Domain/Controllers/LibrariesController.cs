@@ -1,4 +1,5 @@
-﻿using LibraryInfo.API.Models;
+﻿using LibraryInfo.API.Entities;
+using LibraryInfo.API.Models;
 using LibraryInfo.API.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -61,8 +62,54 @@ namespace LibraryInfo.API.Controllers
 
             return Ok(libraryToReturn);
         }
-        //[HttpPost()]
-        //[HttpPut("{id}")]
+
+        [HttpPost()]
+        public IActionResult AddLibrary(int cityId, [FromBody] LibraryForCreationDto library)
+        {
+            if (!_libraryInfoRepository.CityExists(cityId))
+            {
+                return NotFound();
+            }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var libraryEntity = new Library()
+            {
+                Name = library.Name,
+                Contact = library.Contact
+            };
+            libraryEntity.CityId = cityId;
+
+            _libraryInfoRepository.AddLibrary(libraryEntity);
+            _libraryInfoRepository.Save();
+
+            return Created($"api/cities/{cityId}/libraries", libraryEntity);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateLibrary(int cityId, int id, [FromBody] LibraryForCreationDto library)
+        {
+            if (!_libraryInfoRepository.CityExists(cityId))
+            {
+                return NotFound();
+            }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var libraryEntity = new Library()
+            {
+                Name = library.Name,
+                Contact = library.Contact,
+                Id = id,
+                CityId = cityId
+            };
+
+            _libraryInfoRepository.UpdateLibrary(libraryEntity);
+            _libraryInfoRepository.Save();
+            return NoContent();
+        }
         //[HttpPatch("{id}")]
         //[HttpDelete("{id}")]
     }

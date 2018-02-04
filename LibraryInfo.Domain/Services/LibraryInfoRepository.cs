@@ -20,6 +20,11 @@ namespace LibraryInfo.API.Services
             return _context.Cities.Any(c => c.Id == cityId);
         }
 
+        public bool LibraryExists(int libraryId)
+        {
+            return _context.Libraries.Any(l => l.Id == libraryId);
+        }
+
         public IEnumerable<City> GetCities()
         {
             return _context.Cities.ToList();
@@ -50,12 +55,32 @@ namespace LibraryInfo.API.Services
 
         public bool Save()
         {
-            throw new NotImplementedException();
+            return (_context.SaveChanges() == 1);
         }
 
-        public void UpdateCity(int cityId)
+        public void UpdateCity(City city)
         {
-            throw new NotImplementedException();
+            var updateable = GetCity(city.Id);
+            updateable.Name = city.Name;
+            updateable.Inhabitants = city.Inhabitants;
+        }
+
+        public void UpdateLibrary(Library library)
+        {
+            var updateable = GetLibraryForCity(library.CityId, library.Id);
+            updateable.Name = library.Name;
+            updateable.Contact = library.Contact;
+
+        }
+
+        public void AddLibrary(Library library)
+        {
+            _context.Libraries.Add(library);
+        }
+
+        public void AddCity(City city)
+        {
+            _context.Cities.Add(city);
         }
     }
 }
