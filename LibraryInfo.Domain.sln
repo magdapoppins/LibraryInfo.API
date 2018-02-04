@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryInfo.Domain", "LibraryInfo.Domain\LibraryInfo.Domain.csproj", "{EE9BCAE0-B3A3-4298-90B6-8E8246A58BC2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryInfo.API", "LibraryInfo.Domain\LibraryInfo.API.csproj", "{EE9BCAE0-B3A3-4298-90B6-8E8246A58BC2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
