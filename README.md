@@ -6,18 +6,18 @@ A RESTfulish API and entity repository for CRUD on library data in .NET Core.
 ### Accessing the endpoints
 The endpoints of this API allow it's consumers to create, read, update and delete resources from the database. The endpoints and their respective HTTP verbs are as follows:
 
-```GET api/cities``` - Gets a list of cities from the data repository.
-```GET api/cities/{cityId}``` - Gets a city by ID.
-```POST api/cities``` - Creates a new city from the request body.
-```PUT api/cities/{cityId}``` - Updates a city by ID.
-```PATCH api/cities/{cityId}``` - Partially updates a city by ID.
-```DELETE api/cities/{cityId}``` - Deletes a city by ID.
+```GET api/cities``` - Gets a list of cities from the data repository.  
+```GET api/cities/{cityId}``` - Gets a city by ID.  
+```POST api/cities``` - Creates a new city from the request body.  
+```PUT api/cities/{cityId}``` - Updates a city by ID.  
+```PATCH api/cities/{cityId}``` - Partially updates a city by ID.  
+```DELETE api/cities/{cityId}``` - Deletes a city by ID.  
 
-```GET api/cities/{cityId}/libraries``` - Gets the cities associated list of libraries.
-```POST api/cities/{cityId}/libraries``` - Adds a new library to the cities list of libraries.
-```PUT api/cities/{cityId}/libraries``` - Updates the library of a specific city.
-```PATCH api/cities/{cityId}/libraries``` - Partially updates the library of a specific city.
-```DELETE api/cities/{cityId}/libraries``` - Deletes the library of a specific city.
+```GET api/cities/{cityId}/libraries``` - Gets the cities associated list of libraries.  
+```POST api/cities/{cityId}/libraries``` - Adds a new library to the cities list of libraries.  
+```PUT api/cities/{cityId}/libraries``` - Updates the library of a specific city.  
+```PATCH api/cities/{cityId}/libraries``` - Partially updates the library of a specific city.  
+```DELETE api/cities/{cityId}/libraries``` - Deletes the library of a specific city.  
 
 
 ### HATEOAS in this project
