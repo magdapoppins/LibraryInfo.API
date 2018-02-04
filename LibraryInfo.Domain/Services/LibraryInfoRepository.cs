@@ -33,9 +33,9 @@ namespace LibraryInfo.API.Services
 
         public IEnumerable<Library> GetLibrariesForCity(int cityId)
         {
-            var city = _context.Cities
-                .FirstOrDefault(c => c.Id == cityId);
-            return city.Libraries.ToList();
+            var libraries = _context.Libraries
+                .Where(l => l.CityId == cityId);
+            return libraries;
         }
 
         public Library GetLibraryForCity(int cityId, int libraryId)
