@@ -1,12 +1,10 @@
 ﻿using LibraryInfo.API.Entities;
 using LibraryInfo.API.Models;
 using LibraryInfo.API.Services;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace LibraryInfo.API.Controllers
 {
@@ -110,7 +108,40 @@ namespace LibraryInfo.API.Controllers
             _libraryInfoRepository.Save();
             return NoContent();
         }
-        //[HttpPatch("{id}")]
-        //[HttpDelete("{id}")]
+
+        [HttpPatch("{id}")]
+        public IActionResult PartiallyUpdateLibrary(int cityId, int id, [FromBody] JsonPatchDocument<LibraryForUpdateDto> patchDocument)
+        {
+            if (!_libraryInfoRepository.CityExists(cityId))
+            {
+                return NotFound();
+            }
+            var libraryForPatching = new LibraryForUpdateDto();
+            patchDocument.ApplyTo(libraryForPatching, ModelState);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var libraryEntity = new Library()
+            {
+                Name = libraryForPatching.Name,
+                Contact = libraryForPatching.Contact
+            };
+            _libraryInfoRepository.UpdateLibrary(libraryEntity);
+            _libraryInfoRepository.Save();
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteLibrary(int cityId, int id)
+        {
+            if (!_libraryInfoRepository.LibraryExists(id))
+            {
+                return NotFound();
+            }
+            _libraryInfoRepository.DeleteLibrary(cityId, id);
+            _libraryInfoRepository.Save();
+            return NoContent();
+        }
     }
 }

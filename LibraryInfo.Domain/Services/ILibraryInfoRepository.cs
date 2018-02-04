@@ -1,8 +1,5 @@
 ﻿using LibraryInfo.API.Entities;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace LibraryInfo.API.Services
 {
@@ -19,6 +16,9 @@ namespace LibraryInfo.API.Services
 
         void AddLibrary(Library library);
         void AddCity(City city);
+
+        void DeleteLibrary(int cityId, int id);
+        void DeleteCity(int id);
 
         bool CityExists(int cityId);
         bool LibraryExists(int libraryId);

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using LibraryInfo.API.Entities;
 
 namespace LibraryInfo.API.Services
@@ -81,6 +79,21 @@ namespace LibraryInfo.API.Services
         public void AddCity(City city)
         {
             _context.Cities.Add(city);
+        }
+
+        public void DeleteLibrary (int cityId, int id)
+        {
+            var library = GetLibraryForCity(cityId, id);
+            _context.Libraries.Remove(library);
+        }
+
+        public void DeleteCity (int id)
+        {
+            var city = GetCity(id);
+            var librariesOfCity = _context.Libraries
+                .Where(l => l.CityId == id);
+            _context.Libraries.RemoveRange(librariesOfCity);
+            _context.Cities.Remove(city);
         }
     }
 }

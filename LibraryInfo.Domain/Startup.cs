@@ -49,6 +49,7 @@ namespace LibraryInfo.Domain
             AutoMapper.Mapper.Initialize(cfg =>
             {
                 cfg.CreateMap<List<CityWithoutLibrariesDto>, List<City>>();
+                cfg.CreateMap<List<Library>, List<LibraryDto>>();
             });
         }
     }
