@@ -83,9 +83,14 @@ namespace LibraryInfo.API.Controllers
             {
                 return NotFound();
             }
+            var cityFromDb = _libraryInfoRepository.GetCity(id);
             var cityEntity = Mapper.Map<City>(city);
 
-            _libraryInfoRepository.UpdateCity(cityEntity);
+            // Double check this...
+            // Map to a specific one from the new one
+
+            Mapper.Map(city, cityFromDb); 
+            //Mapper.Map(cityEntity, cityFromDb);
 
             if (!_libraryInfoRepository.Save())
             {
@@ -101,15 +106,16 @@ namespace LibraryInfo.API.Controllers
             {
                 return NotFound();
             }
+            var cityFromDb = _libraryInfoRepository.GetCity(id);
             var cityForPatching = new CityForUpdateDto();
             patchDocument.ApplyTo(cityForPatching, ModelState);
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var cityEntity = Mapper.Map<City>(cityForPatching);
+            //var cityEntity = Mapper.Map<City>(cityForPatching);
 
-            _libraryInfoRepository.UpdateCity(cityEntity);
+            Mapper.Map(cityForPatching, cityFromDb);
 
             if (!_libraryInfoRepository.Save())
             {

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace LibraryInfo.API.Controllers
 {
@@ -97,13 +98,16 @@ namespace LibraryInfo.API.Controllers
             {
                 return NotFound();
             }
+            var cityFromDb = _libraryInfoRepository.GetCity(cityId);
+            var libraryFromDb = cityFromDb.Libraries.FirstOrDefault(l => l.Id == id);
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var libraryEntity = Mapper.Map<Library>(library);
-
-            _libraryInfoRepository.UpdateLibrary(libraryEntity);
+            //var libraryEntity = Mapper.Map<Library>(library);
+            // Create a mapping and save changes
+            Mapper.Map(library, libraryFromDb);
 
             if (!_libraryInfoRepository.Save())
             {
@@ -119,14 +123,19 @@ namespace LibraryInfo.API.Controllers
             {
                 return NotFound();
             }
+            var cityFromDb = _libraryInfoRepository.GetCity(cityId);
+            var libraryFromDb = cityFromDb.Libraries.FirstOrDefault(l => l.Id == id);
             var libraryForPatching = new LibraryForUpdateDto();
             patchDocument.ApplyTo(libraryForPatching, ModelState);
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var libraryEntity = Mapper.Map<Library>(libraryForPatching);
-            _libraryInfoRepository.UpdateLibrary(libraryEntity);
+            //var libraryEntity = Mapper.Map<Library>(libraryForPatching);
+            //_libraryInfoRepository.UpdateLibrary(libraryEntity);
+
+            Mapper.Map(libraryForPatching, libraryFromDb);
+
             if (!_libraryInfoRepository.Save())
             {
                 return StatusCode(500, "An error occurred when handling your request.");
