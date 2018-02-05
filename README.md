@@ -13,11 +13,12 @@ The endpoints of this API allow it's consumers to create, read, update and delet
 ```PATCH api/cities/{cityId}``` - Partially updates a city by ID.  
 ```DELETE api/cities/{cityId}``` - Deletes a city by ID.  
 
-```GET api/cities/{cityId}/libraries``` - Gets the cities associated list of libraries.  
+```GET api/cities/{cityId}/libraries``` - Gets a list of libraries of a specified city.  
+```GET api/cities/{cityId}/libraries/{id}``` - Gets a library by it's id.  
 ```POST api/cities/{cityId}/libraries``` - Adds a new library to the cities list of libraries.  
-```PUT api/cities/{cityId}/libraries``` - Updates the library of a specific city.  
-```PATCH api/cities/{cityId}/libraries``` - Partially updates the library of a specific city.  
-```DELETE api/cities/{cityId}/libraries``` - Deletes the library of a specific city.  
+```PUT api/cities/{cityId}/libraries/{id}``` - Updates the library of a specific city.  
+```PATCH api/cities/{cityId}/libraries/{id}``` - Partially updates the library of a specific city.  
+```DELETE api/cities/{cityId}/libraries/{id}``` - Deletes the library of a specific city.  
 
 
 ### REST in this project
