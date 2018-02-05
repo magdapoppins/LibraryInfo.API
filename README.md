@@ -36,22 +36,17 @@ This app is built using Visual Studio 2017 Community Edition. It depends on comp
 ### Installation
 If you have GIT installed, you can clone this project by the command ```git clone https://github.com/magdapoppins/LibraryInfo.API.git```. After cloning the project, you can open the .sln file in Visual Studio and build it by running ```ctrl + shift + B```. At the first build, the database is created by the Entity Framework Code First -functionality. The connection string needs to be included in the project properties. The default connection string for the local SQL Server Management Studio is ```"Server=(localdb)\\mssqllocaldb;Database=LibraryInfoDB;Trusted_connection=True;"```. 
 
-## Testing
+## Testing  
 
 ### What tests this project features
-This project includes a set of unit tests, which are built for the purpose of checking the 
-
-### How to run the tests
-For running the tests, you will need NLog.
+*Work in progress*
 
 ## Deployment instructions
-The deployment of this project is done by selecting "publish" from the list of alternatives that appears by right-clicking the project folder. Select the method of deployment which suits you and 
-
+The deployment of this project is done by selecting "publish" from the list of alternatives that appears by right-clicking the project folder. The project can be deployed on IIS, Windows Service, Ngix or Apache. Instructions for deployment can be found [here](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/?tabs=aspnetcore2x). 
 
 ## Built with
 Entity Framework Core 
 .NET Core
 
-
 ## Acknowledgements
-This project follows the many wise guidelines and instructions of the developer community centered around REST Api:s. Special thanks to []() and []() for their courses and blogposts about API creation and styleguides. Thanks to the style directives of [Adidas API Styleguide]() for many good tips. I also want to mention the [Copenhagen REST API meetup]() and recommend them to anyone interested in API creation and refinement. 
+This project follows the many wise guidelines and instructions of the developer community centered around REST Api:s. Special thanks to [Kevin Dockx](https://www.kevindockx.com/) and [Shawn Wildermuth](https://wildermuth.com/) for their courses and blogposts about API creation and design. Thanks to the style directives of [Adidas API Styleguide](https://adidas-group.gitbooks.io/api-guidelines/content/) for many good tips. I also want to mention the [Copenhagen REST API meetup](https://www.meetup.com/REST-API-Meetup-Location-in-Copenhagen-Aarhus-and-Aalborg) and recommend them to anyone interested in API creation and refinement. 
