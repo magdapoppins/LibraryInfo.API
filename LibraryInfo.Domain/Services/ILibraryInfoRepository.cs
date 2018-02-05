@@ -11,9 +11,6 @@ namespace LibraryInfo.API.Services
         IEnumerable<Library> GetLibrariesForCity(int cityId);
         Library GetLibraryForCity(int libraryId);
 
-        void UpdateCity(City city);
-        void UpdateLibrary(Library library);
-
         void AddLibrary(Library library);
         void AddCity(City city);
 
