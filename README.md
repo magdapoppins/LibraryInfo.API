@@ -20,14 +20,21 @@ The endpoints of this API allow it's consumers to create, read, update and delet
 ```DELETE api/cities/{cityId}/libraries``` - Deletes the library of a specific city.  
 
 
-### HATEOAS in this project
-This application uses Hyperlinks As The Engine Of Appilication State (HATEOAS). Every JSON object retreived from the repository contains links to the other actions related to that resource. This allows the application to evolve without setting complex requirements on the frontend architecture.
+### REST in this project
+Although this project doesn't implement REST completely, it has several RESTful qualities. Out of the six REST constrains, this project implements the following:  
+1) Client-Server-separation  
+2) Statelessness  
+3) Uniform contract (HATEOAS still in progress)  
+4) Cacheability (not implemented)  
+5) Layered design  
+6) Code on Demand (not implemented)  
+
 
 ### Prerequisites
 This app is built using Visual Studio 2017 Community Edition. It depends on components from the ASP.NET Core Metapackage, such as Entity Framework Core and LINQ. You will be able to run this project on a Windows machine or on Mac (Visual Studio for Mac) or Linux (by the .NET Core cross-platform feature). 
 
 ### Installation
-If you have GIT installed, you can clone this project by the command ```git clone ```. After cloning the project, you can open the .sln file in Visual Studio and build it by running ```ctrl + shift + B```. At the first build, the database is created by the Entity Framework Code First -functionality. The connection string needs to be included in the project properties. The default connection string for the local SQL Server Management Studio is ```"Database:(mssqllocaldb)\\localdb;Table:MemberBase;Trusted_connection:True;"```. 
+If you have GIT installed, you can clone this project by the command ```git clone https://github.com/magdapoppins/LibraryInfo.API.git```. After cloning the project, you can open the .sln file in Visual Studio and build it by running ```ctrl + shift + B```. At the first build, the database is created by the Entity Framework Code First -functionality. The connection string needs to be included in the project properties. The default connection string for the local SQL Server Management Studio is ```"Server=(localdb)\\mssqllocaldb;Database=LibraryInfoDB;Trusted_connection=True;"```. 
 
 ## Testing
 
