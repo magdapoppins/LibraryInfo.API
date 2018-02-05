@@ -25,18 +25,7 @@ namespace LibraryInfo.API.Controllers
         public IActionResult GetCities()
         {
             var cityEntities = _libraryInfoRepository.GetCities();
-            var citiesToReturn = new List<CityWithoutLibrariesDto>();
-            foreach (var city in cityEntities)
-            {
-                var cityWithoutLibraries = new CityWithoutLibrariesDto()
-                {
-                    Name = city.Name,
-                    Inhabitants = city.Inhabitants,
-                    Id = city.Id
-                };
-
-                citiesToReturn.Add(cityWithoutLibraries);
-            }
+            var citiesToReturn = Mapper.Map<CityWithoutLibrariesDto>(cityEntities);
             return Ok(citiesToReturn);
         }
 

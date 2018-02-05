@@ -50,6 +50,7 @@ namespace LibraryInfo.API.Controllers
         {
             if (!_libraryInfoRepository.CityExists(cityId))
             {
+                _logger.
                 return NotFound();
             }
             var library = _libraryInfoRepository.GetLibraryForCity(id);
