@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using LibraryInfo.API.Entities;
 using LibraryInfo.API.Models;
 using LibraryInfo.API.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,8 +24,7 @@ namespace LibraryInfo.Domain
 
             services.AddScoped<ILibraryInfoRepository, LibraryInfoRepository>();
         }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole();
@@ -48,8 +43,14 @@ namespace LibraryInfo.Domain
 
             AutoMapper.Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<List<CityWithoutLibrariesDto>, List<City>>();
-                cfg.CreateMap<List<Library>, List<LibraryDto>>();
+                cfg.CreateMap<CityWithoutLibrariesDto, City>();
+                cfg.CreateMap<Library, LibraryDto>();
+                cfg.CreateMap<City, CityWithoutLibrariesDto>();
+                cfg.CreateMap<Library, LibraryForCreationDto>();
+                cfg.CreateMap<City, CityForCreationDto>();
+                cfg.CreateMap<LibraryForCreationDto, Library>();
+                cfg.CreateMap<CityForCreationDto, City>();
+
             });
         }
     }

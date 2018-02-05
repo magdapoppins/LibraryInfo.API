@@ -55,20 +55,25 @@ namespace LibraryInfo.API.Controllers
             return Ok(cityToReturn);
         }
 
-        [HttpPost()]
+        [HttpPost(Name = "AddCity")]
         public IActionResult AddCity([FromBody] CityForCreationDto city)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var cityEntity = new City()
-            {
-                Name = city.Name,
-                Inhabitants = city.Inhabitants
-            };
+            var cityEntity = Mapper.Map<City>(city);
+
             _libraryInfoRepository.AddCity(cityEntity);
-            return Created($"api/cities", cityEntity);
+
+            if (!_libraryInfoRepository.Save())
+            {
+                return StatusCode(500, "An error occurred when handling your request.");
+            }
+
+            var cityToReturn = Mapper.Map<CityDto>(cityEntity);
+
+            return CreatedAtRoute("AddCity", new {cityId = cityToReturn.Id}, cityToReturn);
         }
 
         [HttpPut("{id}")]
@@ -78,14 +83,14 @@ namespace LibraryInfo.API.Controllers
             {
                 return NotFound();
             }
-            var cityEntity = new City()
-            {
-                Name = city.Name,
-                Inhabitants = city.Inhabitants,
-                Id = id
-            };
+            var cityEntity = Mapper.Map<City>(city);
+
             _libraryInfoRepository.UpdateCity(cityEntity);
-            _libraryInfoRepository.Save();
+
+            if (!_libraryInfoRepository.Save())
+            {
+                return StatusCode(500, "An error occurred when handling your request.");
+            }
             return NoContent();
         }
 
@@ -102,17 +107,16 @@ namespace LibraryInfo.API.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var cityEntity = new City()
-            {
-                Name = cityForPatching.Name,
-                Inhabitants = cityForPatching.Inhabitants,
-                Id = id
-            };
-            _libraryInfoRepository.UpdateCity(cityEntity);
-            _libraryInfoRepository.Save();
-            return NoContent();
+            var cityEntity = Mapper.Map<City>(cityForPatching);
 
-            //[HttpDelete("{id}")]
+            _libraryInfoRepository.UpdateCity(cityEntity);
+
+            if (!_libraryInfoRepository.Save())
+            {
+                return StatusCode(500, "An error occurred when handling your request.");
+            }
+            return NoContent();
+            
         }
 
         [HttpDelete("{id}")]
@@ -123,7 +127,11 @@ namespace LibraryInfo.API.Controllers
                 return NotFound();
             }
             _libraryInfoRepository.DeleteCity(id);
-            _libraryInfoRepository.Save();
+
+            if (!_libraryInfoRepository.Save())
+            {
+                return StatusCode(500, "An error occurred when handling your request.");
+            }
             return NoContent();
         }
     }

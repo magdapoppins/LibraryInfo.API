@@ -50,7 +50,7 @@ namespace LibraryInfo.API.Services
 
         public bool Save()
         {
-            return (_context.SaveChanges() == 1);
+            return (_context.SaveChanges() >= 0);
         }
 
         public void UpdateCity(City city)
