@@ -25,7 +25,7 @@ The endpoints of this API allow it's consumers to create, read, update and delet
 Although this project doesn't implement REST completely, it has several RESTful qualities. Out of the six REST constrains, this project implements the following:  
 1) Client-Server-separation  
 2) Statelessness  
-3) Uniform contract (HATEOAS still in progress)  
+3) Uniform contract (HATEOS still in progress)  
 4) Cacheability (not implemented)  
 5) Layered design  
 6) Code on Demand (not implemented)  
